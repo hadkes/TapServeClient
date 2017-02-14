@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: head(title=~{::title},links=~{})">
+<meta charset="UTF-8">
+<title>Administrator Registration Form</title>
+
+<link rel='stylesheet prefetch'
+	href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
+#login-box {
+	width: 300px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+}
+</style>
+</head>
+
+<body th:include="layout :: body" >
+	<div th:fragment="content" class="login-wrap">
+		<div class="login-html">
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label
+				for="tab-1" class="tab">Administrator Registration Page</label> <input id="tab-2"
+				type="radio" name="tab" class="sign-up"><label for="tab-2"
+				class="tab"></label>
+			<div class="login-form">
+				<div class="sign-in-htm">
+					<div class="sign-in-htm">
+						<div class="group">
+							<label for="user" class="label">Name</label> <input
+								id="name" type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">Description</label> 
+							<textarea  class="input"></textarea>
+						</div>
+						<div class="group">
+							<input type="submit" class="button" value="Register">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
