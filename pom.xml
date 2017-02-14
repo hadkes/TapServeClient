@@ -21,6 +21,6 @@
 </dependency>
   </dependencies>
   <build>
-    <finalName>TapServerClient</finalName>
+    <finalName>TapServeClient</finalName>
   </build>
 </project>
