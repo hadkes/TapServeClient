@@ -1,49 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: head(title=~{::title},links=~{})">
-	<meta charset="UTF-8">
-	<title>TapServe Login Form</title>
-	
-	<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'>
-	<link rel="stylesheet" href="../css/style.css">
-	
-	<style>
-		.error {
-			padding: 15px;
-			margin-bottom: 20px;
-			border: 1px solid transparent;
-			border-radius: 4px;
-			color: #a94442;
-			background-color: #f2dede;
-			border-color: #ebccd1;
-		}
-
-		.msg {
-			padding: 15px;
-			margin-bottom: 20px;
-			border: 1px solid transparent;
-			border-radius: 4px;
-			color: #31708f;
-			background-color: #d9edf7;
-			border-color: #bce8f1;
-		}
-
-		#login-box {
-			width: 300px;
-			padding: 20px;
-			margin: 100px auto;
-			background: #fff;
-			-webkit-border-radius: 2px;
-			-moz-border-radius: 2px;
-			border: 1px solid #000;
-		}
-	</style>
-	<script type="text/javascript" src="./js/login.js"></script>
-		
-</head>
-
-<body th:include="layout :: body" th:with="content=~{::content}">
-  <div th:fragment="content" class="login-wrap">
+ <script type="text/javascript" src="./js/login.js"></script>
+ <div th:fragment="content" class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
@@ -73,38 +29,38 @@
 			</form>	
 			<div class="sign-up-htm">
 					<div class="group">
-						<label for="user" class="label">Username</label> <input id="user"
-							type="text" class="input">
+						<label for="user" class="label">Username</label> <input id="username"
+							type="text" class="input" required="required">
 					</div>
 					<div class="group">
-						<label for="pass" class="label">Password</label> <input id="pass"
-							type="password" class="input" data-type="password">
+						<label for="pass" class="label">Password</label> <input id="password"
+							type="password" class="input" data-type="password" required="required">
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Repeat Password</label> <input
-							id="pass" type="password" class="input" data-type="password">
+							id="repeat_password" type="password" class="input" data-type="password" required="required">
 					</div>
 					<div class="group">
 						<table style="color: rgb(200, 200, 200);">
 							<tbody>
 								<tr><td colspan="6">Login As</td></tr>
 								<tr>
-									<td style="width: 6%;"><input id="pass" type="radio" class="input" value = "user"></td>
+									<td style="width: 6%;"><input type="radio" name="usertype" class="input" value ="user" onclick=setVal(this);></td>
 									<td style="width: 26%;">User</td>
 
 
-									<td style="width: 6%;"><input id="pass" type="radio" class="input" value="service_provider"></td>
+									<td style="width: 6%;"><input type="radio" name="usertype" class="input" value="service_provider" onclick=setVal(this);></td>
 									<td style="width: 26%;">Service Provider</td>
 
 
-									<td style="width: 6%;"><input id="pass" type="radio" class="input" value="administrator"></td>
+									<td style="width: 6%;"><input type="radio" name="usertype" class="input" value="administrator" onclick=setVal(this);></td>
 									<td style="width: 26%;">Administrator</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 					<div class="group">
-						<input type="submit" class="button" value="Sign Up">
+						<input type="submit" class="button" onclick="signUp();" value="Sign Up">
 					</div>
 					<div class="hr"></div>
 					<div class="foot-lnk">
@@ -114,7 +70,3 @@
 		</div>
 	</div>
 </div>
-  
-  
-</body>
-</html>
