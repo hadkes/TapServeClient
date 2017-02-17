@@ -14,20 +14,23 @@ function signUp(){
 		success: function(result){
 			if(usertype == "user"){
 				$(document).attr("title", "User Registration");
-				$('#pageContent').load( "pages/UserRegistrationPage.html" );
+				$('#pageContent').load( "pages/UserRegistrationPage.html");
+				$('#generatedId').val(result);
 			}
 			else if(usertype == "service_provider"){
 				$(document).attr("title", "Service Provider Registration");
 				$('#pageContent').load( "pages/SPRegistrationPage.html" );
+				$('#generatedId').val(result);
 			}
 			else if(usertype == "administrator"){
 				$(document).attr("title", "Admin Registration");
 				$('#pageContent').load( "pages/AdminRegistrationPage.html" );
+				$('#generatedId').val(result);
 			}
 		}
 	});
 }
-	
+
 function setVal(element){
 	usertype = $(element).val();
 }
