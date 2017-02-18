@@ -2,6 +2,7 @@
  * 
  */
 var servicesSelected = [];
+var servicesFetchedFromDb;
 function SPRegister(){
 	
 	fillServices();
@@ -32,22 +33,30 @@ function SPRegister(){
 	});
 }
 
+function fetchServices(){
+	$.ajax({
+		contentType: 'application/JSON',
+		type: "GET",
+		url:'http://localhost:8083/tapserve/services',
+		success: function(result){
+			servicesFetchedFromDb = result;
+			populateServicesOnPage();
+		}
+	});
+}
+
+function populateServicesOnPage(){
+	var arrayLength= servicesFetchedFromDb.length;
+	for (var i = 0; i < arrayLength; i++) {
+		$( "#servicesChecklist" ).append('<input type="checkbox" id="ServiceOpt'+i+'">');
+		$( "#servicesChecklist" ).append(servicesFetchedFromDb[i].name + '<br>');
+	}
+}
+
 function fillServices(){
-	if(document.getElementById('electricianServiceOpt').checked)
-		servicesSelected.push(electricianService);
-	
-	if(document.getElementById('carpenterServiceOpt').checked)
-		servicesSelected.push(carpenterService);
-	
-	if(document.getElementById('plumberServiceOpt').checked)
-		servicesSelected.push(plumberService);
-	
-	if(document.getElementById('eventPlannerServiceOpt').checked)
-		servicesSelected.push(eventPlannerService);
-	
-	if(document.getElementById('photographerServiceOpt').checked)
-		servicesSelected.push(photographerService);
-	
-	if(document.getElementById('yogaInstructorServiceOpt').checked)
-		servicesSelected.push(yogaInstructorService);
+	var arrayLength= servicesFetchedFromDb.length;
+	for(var i = 0; i < arrayLength; i++){
+		if(document.getElementById('ServiceOpt'+i).checked)
+			servicesSelected.push(servicesFetchedFromDb[i]);
+	}
 }
