@@ -31,6 +31,30 @@ function signUp(){
 	});
 }
 
+function login(){
+	var username = $('#loginusername').val();
+	var password = $('#loginpassword').val();
+	var usertype = "USER";
+	if(usertype == "USER"){
+		
+		
+		$(document).attr("title", "TapServe");
+		$('#pageContent').load( "pages/secured/UserLanding.html");
+		
+		
+	}
+	else if(usertype == "SERVICE_PROVIDER"){
+		$(document).attr("title", "TapServe");
+		
+		
+	}
+	else if(usertype == "ADMIN"){
+		$(document).attr("title", "TapServe");
+		
+		
+	}
+}
+
 function setVal(element){
 	usertype = $(element).val();
 }

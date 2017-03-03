@@ -1,0 +1,29 @@
+<script type="text/javascript" src="./js/User.js"></script>
+<div th:fragment="content" class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="home" onclick="showHome();" checked><label for="tab-1" class="tab">Home</label> 
+		<input id="tab-2" type="radio" name="tab" class="search" onclick="showSearch();"><label for="tab-2" class="tab">Search</label>
+		<input id="tab-3" type="radio" name="tab" class="appointmentHistory" onclick="showAppointments();"><label for="tab-3" class="tab">Appointment History</label>
+		<div class="login-form">
+
+			<div class="home-htm">
+			
+			</div>
+
+			<div class="search-htm">
+			<div class="group">
+					<label for="user" class="label">Search</label> <input
+						id="loginusername" type="text" class="input">
+				</div>
+			</div>
+
+			<div class="appointmentHistory-htm">
+				<div class="group">
+					<label for="user" class="label">Appointment</label> <input
+						id="loginusername" type="text" class="input">
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

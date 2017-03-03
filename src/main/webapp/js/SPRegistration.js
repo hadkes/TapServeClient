@@ -1,6 +1,11 @@
 /**
  * 
  */
+$( document ).ready(function() {
+		fetchServices();
+	});
+
+
 var servicesSelected = [];
 var servicesFetchedFromDb;
 function SPRegister(){
