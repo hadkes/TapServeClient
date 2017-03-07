@@ -34,6 +34,9 @@ function signUp(){
 function login(){
 	var username = $('#loginusername').val();
 	var password = $('#loginpassword').val();
+	
+	
+	
 	var usertype = "USER";
 	if(usertype == "USER"){
 		

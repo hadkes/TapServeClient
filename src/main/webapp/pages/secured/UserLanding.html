@@ -1,19 +1,46 @@
 <script type="text/javascript" src="./js/User.js"></script>
 <div th:fragment="content" class="login-wrap">
 	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="home" onclick="showHome();" checked><label for="tab-1" class="tab">Home</label> 
-		<input id="tab-2" type="radio" name="tab" class="search" onclick="showSearch();"><label for="tab-2" class="tab">Search</label>
-		<input id="tab-3" type="radio" name="tab" class="appointmentHistory" onclick="showAppointments();"><label for="tab-3" class="tab">Appointment History</label>
+		<input id="tab-1" type="radio" name="tab" class="home"
+			onclick="showHome();" checked><label for="tab-1" class="tab">Home</label>
+		<input id="tab-2" type="radio" name="tab" class="search"
+			onclick="showSearch();"><label for="tab-2" class="tab">Search</label>
+		<input id="tab-3" type="radio" name="tab" class="appointmentHistory"
+			onclick="showAppointments();"><label for="tab-3" class="tab">Appointment
+			History</label>
 		<div class="login-form">
 
-			<div class="home-htm">
-			
-			</div>
+			<div class="home-htm">User Data</div>
 
 			<div class="search-htm">
-			<div class="group">
-					<label for="user" class="label">Search</label> <input
-						id="loginusername" type="text" class="input">
+				<div class="group">
+					<label for="pass" class="label">Services</label> <select
+						id="servicesDropdown" class="input">
+						<option value="select" style="color: black;">--Select--</option>
+					</select>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Region</label> <select
+						name="regionId" class="input" id="regionIdentifier">
+						<option value="select" style="color: black;">--Select--</option>
+						<option style="color: black;" value="dublin1">Dublin1</option>
+						<option style="color: black;" value="dublin2">Dublin2</option>
+						<option style="color: black;" value="dublin3">Dublin3</option>
+						<option style="color: black;" value="dublin4">Dublin4</option>
+						<option style="color: black;" value="dublin5">Dublin5</option>
+						<option style="color: black;" value="dublin6">Dublin6</option>
+						<option style="color: black;" value="dublin7">Dublin7</option>
+						<option style="color: black;" value="dublin8">Dublin8</option>
+						<option style="color: black;" value="dublin9">Dublin9</option>
+						<option style="color: black;" value="dublin10">Dublin10</option>
+					</select>
+				</div>
+				<div class="group">
+					<input type="button" class="button" value="Search" onclick="searchSP();">
+					
+				</div>
+				<div id="dataDiv" style="display: none;">
+				<span id="noResultError" style="display: none">No results</span>
 				</div>
 			</div>
 
