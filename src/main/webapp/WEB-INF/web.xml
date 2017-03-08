@@ -4,16 +4,45 @@
 
 <web-app>
 	<display-name>TapServe Web Application</display-name>
+	<servlet>
+		<servlet-name>UserInfoServlet</servlet-name>
+		<display-name>UserInfoServlet</display-name>
+		<servlet-class>edu.tcd.tapserve.client.UserInfoServlet</servlet-class>
+		<init-param>
+			<param-name>service_hostname</param-name>
+			<param-value>localhost</param-value>
+		</init-param>
+		<init-param>
+			<param-name>service_port</param-name>
+			<param-value>8083</param-value>
+		</init-param>
+		<init-param>
+			<param-name>app_context</param-name>
+			<param-value>tapserve</param-value>
+		</init-param>
+		<init-param>
+			<param-name>user_info_service</param-name>
+			<param-value>userInfo</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserInfoServlet</servlet-name>
+		<url-pattern>/secured/UserInfoServlet</url-pattern>
+	</servlet-mapping>
+
 	<!-- <welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/pages/secured/UserLanding.html</welcome-file>
 	</welcome-file-list> -->
 	
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
-			<url-pattern>/pages/secured/**</url-pattern>
+			<url-pattern>/pages/secured/*</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>ADMIN</role-name>
@@ -24,7 +53,7 @@
 			<transport-guarantee>NONE</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>secureDomain</realm-name>
@@ -33,7 +62,7 @@
 			<form-error-page>/pages/login_failed.jsp</form-error-page>
 		</form-login-config>
 	</login-config>
-	
+
 </web-app>
 
 
