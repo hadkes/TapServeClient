@@ -34,28 +34,32 @@ function signUp(){
 function login(){
 	var username = $('#loginusername').val();
 	var password = $('#loginpassword').val();
+
+	var obj = new Object();
+	obj.username = username;
+	obj.password = password;
+	var jsonString = JSON.stringify(obj);
 	
-	
-	
-	var usertype = "USER";
-	if(usertype == "USER"){
-		
-		
-		$(document).attr("title", "TapServe");
-		$('#pageContent').load( "pages/secured/UserLanding.html");
-		
-		
-	}
-	else if(usertype == "SERVICE_PROVIDER"){
-		$(document).attr("title", "TapServe");
-		
-		
-	}
-	else if(usertype == "ADMIN"){
-		$(document).attr("title", "TapServe");
-		
-		
-	}
+	$.ajax({
+		contentType: 'application/JSON',
+		type: "POST",
+		url: 'http://localhost:8083/tapserve/login',
+		data: jsonString,
+		success: function(result){
+			var usertype = result.role.name;
+			alert("On return usertype "+usertype);
+			if(usertype == "USER"){
+				$(document).attr("title", "TapServe - USER");
+				$('#pageContent').load( "pages/secured/UserLanding.html");
+			}
+			else if(usertype == "SERVICE_PROVIDER"){
+				$(document).attr("title", "TapServe - SERVICE_PROVIDER");
+			}
+			else if(usertype == "ADMIN"){
+				$(document).attr("title", "TapServe - ADMIN");
+			}
+		}
+	});
 }
 
 function setVal(element){
