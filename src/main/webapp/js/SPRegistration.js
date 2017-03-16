@@ -30,7 +30,6 @@ function SPRegister(){
 		url: 'http://localhost:8083/tapserve/register/service_provider/'+$('#generatedId').val(),
 		data: jsonString,
 		success: function(result){
-			$('#generatedId').val("");
 			$('#successMessage').text("You have been registered successfully! Please wait while you are being redirected to the login page.").show();
 			$('#pageContent').delay(20000).load( "pages/login.html" );
 			$(document).attr("title", "TapServe");

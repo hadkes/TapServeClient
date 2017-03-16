@@ -47,16 +47,19 @@ function login(){
 		data: jsonString,
 		success: function(result){
 			var usertype = result.role.name;
-			alert("On return usertype "+usertype);
+			$('#generatedId').val(result.id);
 			if(usertype == "USER"){
-				$(document).attr("title", "TapServe - USER");
+				$(document).attr("title", "TapServe - User");
 				$('#pageContent').load( "pages/secured/UserLanding.html");
+				$('#userDetailName').text(result.name);				
+				$('#userDetailAddress').text(result.address);
+				$('#userDetailContactNo').text(result.contactNumber);
 			}
 			else if(usertype == "SERVICE_PROVIDER"){
-				$(document).attr("title", "TapServe - SERVICE_PROVIDER");
+				$(document).attr("title", "TapServe - Service Provider");
 			}
 			else if(usertype == "ADMIN"){
-				$(document).attr("title", "TapServe - ADMIN");
+				$(document).attr("title", "TapServe - Admin");
 			}
 		}
 	});

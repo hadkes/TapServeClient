@@ -10,15 +10,30 @@
 			History</label>
 		<div class="login-form">
 
-			<div class="home-htm">User Data</div>
+			<div class="home-htm">
+				<div class="w3-card-8">
+
+					<div class="w3-container w3-center">
+	  					<h3>User Details</h3>
+	  					<img src="images/img_avatar3.png"  alt="Avatar" style="width:15%">
+	  					<h5><span id="userDetailName"></span></h5>
+	  					<h4><span id="userDetailAddress"></span></h4>
+	  					<h4><span id="userDetailContactNo"></span></h4>
+					</div>
+
+				</div>
+
+			</div>
 
 			<div class="search-htm">
+			<div id="searchFields">
 				<div class="group">
 					<label for="pass" class="label">Services</label> <select
 						id="servicesDropdown" class="input">
 						<option value="select" style="color: black;">--Select--</option>
 					</select>
-				</div>
+				</div>				
+				
 				<div class="group">
 					<label for="pass" class="label">Region</label> <select
 						name="regionId" class="input" id="regionIdentifier">
@@ -35,19 +50,95 @@
 						<option style="color: black;" value="dublin10">Dublin10</option>
 					</select>
 				</div>
+				
 				<div class="group">
 					<input type="button" class="button" value="Search" onclick="searchSP();">
-					
 				</div>
+			
+				
 				<div id="dataDiv" style="display: none;">
 				<span id="noResultError" style="display: none">No results</span>
 				</div>
+				</div>
+				<div id="appointmentFields" style="display: none;">
+					
+					<div class="group">
+							<label for="user" class="label">Appointment Name</label> <input
+								id="appointmentName" type="text" class="input">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Appointment Description</label> <textarea id="appointmentDescription" class="input"></textarea>
+						</div>
+					
+					<div class="group">
+							<label for="user" class="label">Address</label> <input
+								id="appointmentAddress" type="text" class="input">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Contact No.</label> <input
+								id="appointmentContactNo" type="text" class="input">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Appointment Date</label> <input
+								id="appointmentDateTime" type="date" class="input">
+						</div>
+					
+					<div class="group">
+							<label for="user" class="label">Service Provider Name</label> <input
+								id="SPname" type="text" class="input" disabled="disabled">
+						</div>
+					
+						
+					 <div class="group">
+							<label for="user" class="label">Organisation Name</label> <input
+								id="orgName" type="text" class="input" disabled="disabled">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Service Provider Contact No.</label> <input
+								id="contactNo" type="text" class="input" disabled="disabled">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Service Provider Address</label> <input
+								id="address" type="text" class="input" disabled="disabled">
+						</div>
+						
+					<div class="group">
+							<label for="user" class="label">Region</label> <input
+								id="region" type="text" class="input" disabled="disabled">
+						</div>
+						
+					<div class="group">
+					<input type="button" class="button" value="Back to search results" onclick="backToSearch();">
+					
+					</div>
+					
+					<div class="group">
+					<input type="button" class="button" value="Book Appointment" onclick="appointmentRequest();">
+					
+					</div>
+					
+					
+				</div>
+				<div id="appointmentResultSpace" style="display: none;">
+					<span class="success-message" id="successMessage"></span>
+					<span class="failure-message" id="failureMessage"></span>
+					&nbsp;
+					<div class="group">
+					<input type="button" class="button" value="Back to search results" onclick="backToSearch();">
+					
+					</div>
+				</div>
+				
 			</div>
 
 			<div class="appointmentHistory-htm">
-				<div class="group">
-					<label for="user" class="label">Appointment</label> <input
-						id="loginusername" type="text" class="input">
+				<div id="appointmentList" style="display: none;  overflow: scroll; height: 840px;">
+				<span id="noResultError" style="display: none">No results</span>
 				</div>
 
 			</div>
