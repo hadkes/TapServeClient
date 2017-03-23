@@ -51,12 +51,13 @@ function login(){
 			if(usertype == "USER"){
 				$(document).attr("title", "TapServe - User");
 				$('#pageContent').load( "pages/secured/UserLanding.html");
-				$('#userDetailName').text(result.name);				
+				$('#userDetailName').text("Hi There").show();			
 				$('#userDetailAddress').text(result.address);
 				$('#userDetailContactNo').text(result.contactNumber);
 			}
 			else if(usertype == "SERVICE_PROVIDER"){
 				$(document).attr("title", "TapServe - Service Provider");
+				$('#pageContent').load( "pages/secured/SPLanding.html");
 			}
 			else if(usertype == "ADMIN"){
 				$(document).attr("title", "TapServe - Admin");

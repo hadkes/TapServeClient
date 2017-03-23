@@ -165,7 +165,7 @@ function showAppointmentListForUser(){
 			}else{
 				$('#appointmentList').show();	
 				for(var i = 0; i < arrayLength; i++){					
-					$('#appointmentList').append('<div id="appointmentPane'+i+'" class="w3-panel w3-blue w3-card-8"> <p> Appointment Name : '+result[i].name+'&nbsp;&nbsp; Booking Date : '+result[i].bookingDate+' &nbsp; Appointment Date : '+result[i].appointmentDate+' </p>'+'<p>Service Provider Name : '+result[i].serviceProvider.name+' </p> <div class="group"><input type="button" class="button" value="Show Details" onclick="showAppointmentDetail('+result[i].id+');"></div></div>');
+					$('#appointmentList').append('<div id="appointmentPane'+i+'" class="w3-panel w3-blue w3-card-8"> <p> Appointment Name : '+result[i].name+'&nbsp;&nbsp; Booking Date : '+(new Date(result[i].bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result[i].appointmentDate)).toLocaleString()+' </p>'+'<p>Service Provider Name : '+result[i].serviceProvider.name+' </p> <div class="group"><input type="button" class="button" value="Show Details" onclick="showAppointmentDetail('+result[i].id+');"></div></div>');
 				}
 			}
 		}

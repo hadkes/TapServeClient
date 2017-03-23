@@ -1,0 +1,46 @@
+<script type="text/javascript" src="./js/SPScript.js"></script>
+<div th:fragment="content" class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="home"
+			onclick="showHome();" checked><label for="tab-1" class="tab">Home</label>
+		<input id="tab-2" type="radio" name="tab" class="search"
+			onclick="showSearch();"><label for="tab-2" class="tab">Open Appointments</label>
+		
+		<div class="login-form">
+
+			<div class="home-htm">
+				<div class="w3-card-8">
+
+					<div class="w3-container w3-center">
+	  					<h3>Service Provider Details</h3>
+	  					<img src="images/img_avatar3.png"  alt="Avatar" style="width:15%">
+	  					<h5><span id="testIdr">test</span></h5>
+	  					<h5><span id="userDetailName"></span></h5>
+	  					<h4><span id="userDetailAddress"></span></h4>
+	  					<h4><span id="userDetailContactNo"></span></h4>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="search-htm">
+			Open appointment
+				<div id="dataDiv" style="display: none;">
+				<span id="noResultError" style="display: none">No results</span>
+				</div>
+				
+				<div id="appointmentResultSpace" style="display: none;">
+					<span class="success-message" id="successMessage"></span>
+					<span class="failure-message" id="failureMessage"></span>
+					&nbsp;
+					<div class="group">
+					<input type="button" class="button" value="Back to search results" onclick="backToSearch();">
+					
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
