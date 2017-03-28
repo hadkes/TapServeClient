@@ -9,6 +9,7 @@ $( document ).ready(function() {
 var servicesFetchedFromDb;
 var searchResult;
 var selectedSP;
+var appointmentList;
 
 
 function showHome(){
@@ -80,7 +81,7 @@ function searchSP(){
 						sum = sum + result[i].reviews[j].rating;
 					}
 					var avgRating = sum/reviewsLength;
-					$('#dataDiv').append('<div id="detailsPane'+i+'" class="w3-panel w3-blue w3-card-8"> <p> Provider Name : '+result[i].serviceProvider.name+'</p> <p> Organisation Name : '+result[i].serviceProvider.organizationName+' &nbsp; Average Rating : '+avgRating+' stars</p>'+'<p>Contact No. : '+result[i].serviceProvider.contactNumber+' &nbsp;&nbsp;&nbsp; Address : '+result[i].serviceProvider.address+' &nbsp;&nbsp; Region : '+result[i].serviceProvider.regionIdentifier+'</p> <div class="group"><input type="button" class="button" value="Book Appointment" onclick="bookAppointment('+i+');"></div></div>');
+					$('#dataDiv').append('<div id="detailsPane'+i+'" class="w3-panel w3-card-8 w3-theme-d1"> <p> Provider Name : '+result[i].serviceProvider.name+'</p> <p> Organisation Name : '+result[i].serviceProvider.organizationName+' &nbsp; Average Rating : '+avgRating+' stars</p>'+'<p>Contact No. : '+result[i].serviceProvider.contactNumber+' &nbsp;&nbsp;&nbsp; Address : '+result[i].serviceProvider.address+' &nbsp;&nbsp; Region : '+result[i].serviceProvider.regionIdentifier+'</p> <div class="group"><input type="button" class="button" value="Book Appointment" onclick="bookAppointment('+i+');"></div></div>');
 				}
 			}
 		}
@@ -151,6 +152,7 @@ function appointmentRequest(){
 
 function showAppointmentListForUser(){
 
+	$('#appointmentDetailsSpace').hide();
 	var id = $('#generatedId').val();
 	$.ajax({
 		contentType: 'application/JSON',
@@ -158,6 +160,7 @@ function showAppointmentListForUser(){
 		url: 'http://localhost:8083/tapserve/'+id+'/appointments',
 		success: function(result){
 			$('#appointmentList').empty();
+			appointmentList = result;
 			var arrayLength = result.length
 			if(arrayLength == 0){
 				$('#appointmentList').show();
@@ -165,9 +168,41 @@ function showAppointmentListForUser(){
 			}else{
 				$('#appointmentList').show();	
 				for(var i = 0; i < arrayLength; i++){					
-					$('#appointmentList').append('<div id="appointmentPane'+i+'" class="w3-panel w3-blue w3-card-8"> <p> Appointment Name : '+result[i].name+'&nbsp;&nbsp; Booking Date : '+(new Date(result[i].bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result[i].appointmentDate)).toLocaleString()+' </p>'+'<p>Service Provider Name : '+result[i].serviceProvider.name+' </p> <div class="group"><input type="button" class="button" value="Show Details" onclick="showAppointmentDetail('+result[i].id+');"></div></div>');
+					$('#appointmentList').append('<div id="appointmentPane'+i+'" class="w3-panel w3-card-8 w3-theme-d1"> <p> Appointment Name : '+result[i].name+'&nbsp;&nbsp; Booking Date : '+(new Date(result[i].bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result[i].appointmentDate)).toLocaleString()+' </p>'+'<p>Service Provider Name : '+result[i].serviceProvider.name+' </p> <div class="group"><input type="button" class="button" value="Show Details" onclick="showAppointmentDetail('+i+');"></div></div>');
 				}
 			}
+		}
+	});
+}
+
+function showAppointmentDetail(count){
+	
+	$('#appointmentList').hide();
+	$('backButton').show();
+	var appointmentId = appointmentList[count].id;
+	var userId = $('#generatedId').val();
+	$.ajax({
+		contentType: 'application/JSON',
+		type: "GET",
+		url: 'http://localhost:8083/tapserve/'+userId+'/appointments/'+appointmentId,
+		success: function(result){
+			$('#appointmentDetailsSpace').empty();
+			$('#appointmentDetailsSpace').show();
+			$('#appointmentDetailsSpace').append('<div id="appointmentPane" class="w3-panel w3-card-8 w3-theme-d1"> <p> Appointment Name : '+result.name+'&nbsp;&nbsp; Booking Date : '+(new Date(result.bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result.appointmentDate)).toLocaleString()+' </p> <p>Description : '+result.description+' &nbsp; Address : '+result.address+' &nbsp; Contact No. : '+result.contactNumber+'</p> <p>Service Provider Name : '+result.serviceProvider.name+' &nbsp;&nbsp; Service Name : '+result.service.name+'</p> <div class="group"><input type="button" class="button" value="Pay" onclick="makePayment('+count+');"></div></div>');
+			}
+	});
+}
+
+function makePayment(count){
+	var appointmentId = appointmentList[count].id;
+	var userId = $('#generatedId').val();
+	
+	$.ajax({
+		contentType: 'application/JSON',
+		type: "GET",
+		url: 'http://localhost:8083/tapserve/'+userId+'/payment/'+appointmentId,
+		success: function(result){
+//			TODO
 		}
 	});
 }
