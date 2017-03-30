@@ -188,7 +188,11 @@ function showAppointmentDetail(count){
 		success: function(result){
 			$('#appointmentDetailsSpace').empty();
 			$('#appointmentDetailsSpace').show();
-			$('#appointmentDetailsSpace').append('<div id="appointmentPane" class="w3-panel w3-card-8 w3-theme-d1"> <p> Appointment Name : '+result.name+'&nbsp;&nbsp; Booking Date : '+(new Date(result.bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result.appointmentDate)).toLocaleString()+' </p> <p>Description : '+result.description+' &nbsp; Address : '+result.address+' &nbsp; Contact No. : '+result.contactNumber+'</p> <p>Service Provider Name : '+result.serviceProvider.name+' &nbsp;&nbsp; Service Name : '+result.service.name+'</p> <div class="group"><input type="button" class="button" value="Pay" onclick="makePayment('+count+');"></div></div>');
+			if(result.status == "0"){
+				$('#appointmentDetailsSpace').append('<div id="appointmentDetailsPane" class="w3-panel w3-card-8 w3-theme-d1"> <p> Appointment Name : '+result.name+'&nbsp;&nbsp; Booking Date : '+(new Date(result.bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result.appointmentDate)).toLocaleString()+' </p> <p>Description : '+result.description+' &nbsp; Address : '+result.address+' &nbsp; Contact No. : '+result.contactNumber+'</p> <p>Service Provider Name : '+result.serviceProvider.name+' &nbsp;&nbsp; Service Name : '+result.service.name+'</p></div> <div id="paymentPane" class="w3-panel w3-card-8 w3-theme-d1"><div class="group"><label for="user" class="label">Amount</label> <input id="amount" type="number"></div><div class="group"><input type="button" class="button" value="Pay" onclick="makePayment('+count+');"></div></div> <div id="reviewPane" class="w3-panel w3-card-8 w3-theme-d1"><div class="group"><label for="user" class="label">Review</label> <textarea id="review" ></textarea></div><div class="group"><label for="user" class="label">Rating</label><select name="rating" class="input" id="rating"><option value="select" style="color: black;">--Select--</option><option style="color: black;" value="1">1</option><option style="color: black;" value="2">2</option><option style="color: black;" value="3">3</option><option style="color: black;" value="4">4</option><option style="color: black;" value="5">5</option></select></div><div class="group"><input type="button" class="button" value="Post Review" onclick="postReview('+count+');"></div></div>');
+			}else if (result.status == "1"){
+				$('#appointmentDetailsSpace').append('<div id="appointmentDetailsPane" class="w3-panel w3-card-8 w3-theme-d1"> <p> Appointment Name : '+result.name+'&nbsp;&nbsp; Booking Date : '+(new Date(result.bookingDate)).toLocaleString()+' &nbsp; Appointment Date : '+(new Date(result.appointmentDate)).toLocaleString()+' </p> <p>Description : '+result.description+' &nbsp; Address : '+result.address+' &nbsp; Contact No. : '+result.contactNumber+'</p> <p>Service Provider Name : '+result.serviceProvider.name+' &nbsp;&nbsp; Service Name : '+result.service.name+'</p></div> <div id="reviewPane" class="w3-panel w3-card-8 w3-theme-d1"><div class="group"><label for="user" class="label">Review</label> <textarea id="review" ></textarea></div><div class="group"><label for="user" class="label">Rating</label><select name="rating" class="input" id="rating"><option value="select" style="color: black;">--Select--</option><option style="color: black;" value="1">1</option><option style="color: black;" value="2">2</option><option style="color: black;" value="3">3</option><option style="color: black;" value="4">4</option><option style="color: black;" value="5">5</option></select></div><div class="group"><input type="button" class="button" value="Post Review" onclick="postReview('+count+');"></div></div>');
+			}
 			}
 	});
 }
@@ -197,12 +201,56 @@ function makePayment(count){
 	var appointmentId = appointmentList[count].id;
 	var userId = $('#generatedId').val();
 	
+	var payment = new Object();
+	payment.amount = $('#amount').val();
+	payment.mode = "card";
+	
+	var appointment = new Object();
+	appointment.id = appointmentId;
+	
+	payment.appointment = appointment;
+	
+	var jsonString = JSON.stringify(payment);
+	
 	$.ajax({
 		contentType: 'application/JSON',
-		type: "GET",
+		type: "POST",
 		url: 'http://localhost:8083/tapserve/'+userId+'/payment/'+appointmentId,
+		data: jsonString,
 		success: function(result){
-//			TODO
+			$('#paymentPane').empty();
+			$('#paymentPane').hide();
 		}
 	});
+}
+
+function postReview(count){
+	var serviceProviderId = appointmentList[count].serviceProvider.id;
+	var userId = $('#generatedId').val();	
+	
+	var review = new Object();
+	review.rating = $('#rating').val();
+	review.review = $('#review').val();
+	
+	var user = new Object();
+	user.id = userId;
+	
+	var serviceProvider = new Object();
+	serviceProvider.id = serviceProviderId;
+	
+	review.user = user;
+	review.serviceProvider = serviceProvider;
+	
+	var jsonString = JSON.stringify(review);
+	$.ajax({
+		contentType: 'application/JSON',
+		type: "POST",
+		url: 'http://localhost:8083/tapserve/'+userId+'/postReview/'+serviceProviderId,
+		data: jsonString,
+		success: function(result){
+			$('#reviewPane').empty();
+			$('#reviewPane').hide();
+		}
+	});
+	
 }
