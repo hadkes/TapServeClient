@@ -16,10 +16,9 @@
 					<div class="w3-container w3-center">
 	  					<h3>User Details</h3>
 	  					<img src="images/img_avatar3.png"  alt="Avatar" style="width:15%">
-	  					<h5><span id="testIdr">2 test</span> </h5>
-	  					<h5><span id="userDetailName"></span></h5>
-	  					<h4><span id="userDetailAddress"></span></h4>
-	  					<h4><span id="userDetailContactNo"></span></h4>
+	  					<span id="userDetailName"></span>
+	  					<span id="userDetailAddress"></span>
+	  					<span id="userDetailContactNo"></span>
 					</div>
 
 				</div>
@@ -60,6 +59,26 @@
 				<div id="dataDiv" style="display: none;">
 				<span id="noResultError" style="display: none">No results</span>
 				</div>
+				
+				
+				
+				<div id="modalPopup" class="w3-modal" style="overflow:auto;">
+    <div class="w3-modal-content w3-card-4">
+	<header class="w3-container w3-teal"> 
+        <span onclick="$('#modalPopup').hide();" class="w3-button w3-display-topright">&times;</span>
+        <h2>Reviews</h2>
+      </header>
+	
+      <div class="w3-container">
+        
+        <div id="modalData">
+		
+		</div>
+        
+      </div>
+    </div>
+  </div>
+				
 				</div>
 				<div id="appointmentFields" style="display: none;">
 					

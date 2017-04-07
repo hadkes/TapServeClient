@@ -15,7 +15,7 @@ function userRegister(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/register/user/'+$('#generatedId').val(),
+		url: 'http://localhost/tapserve/register/user/'+$('#generatedId').val(),
 		data: jsonString,
 		success: function(result){
 			$('#successMessage').text("You have been registered successfully! Please wait while you are being redirected to the login page.").show();

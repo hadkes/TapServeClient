@@ -27,7 +27,7 @@ function SPRegister(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/register/service_provider/'+$('#generatedId').val(),
+		url: 'http://localhost/tapserve/register/service_provider/'+$('#generatedId').val(),
 		data: jsonString,
 		success: function(result){
 			$('#successMessage').text("You have been registered successfully! Please wait while you are being redirected to the login page.").show();
@@ -41,7 +41,7 @@ function fetchServices(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url:'http://localhost:8083/tapserve/services',
+		url:'http://localhost/tapserve/services',
 		success: function(result){
 			servicesFetchedFromDb = result;
 			populateServicesOnPage();

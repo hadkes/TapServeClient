@@ -6,10 +6,11 @@ function signUp(){
 	obj.username = $('#username').val();
 	obj.password = $('#password').val();
 	var jsonString = JSON.stringify(obj);
+	
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/register',
+		url: 'http://localhost/tapserve/register',
 		data: jsonString,
 		success: function(result){
 			if(usertype == "user"){
@@ -43,7 +44,7 @@ function login(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/login',
+		url: 'http://localhost/tapserve/login',
 		data: jsonString,
 		success: function(result){
 			var usertype = result.role.name;
@@ -51,9 +52,9 @@ function login(){
 			if(usertype == "USER"){
 				$(document).attr("title", "TapServe - User");
 				$('#pageContent').load( "pages/secured/UserLanding.html");
-				$('#userDetailName').text("Hi There").show();			
-				$('#userDetailAddress').text(result.address);
-				$('#userDetailContactNo').text(result.contactNumber);
+				$('#userDetailName').text(result.name).show();			
+				$('#userDetailAddress').text(result.address).show();
+				$('#userDetailContactNo').text(result.contactNumber).show();
 			}
 			else if(usertype == "SERVICE_PROVIDER"){
 				$(document).attr("title", "TapServe - Service Provider");

@@ -24,7 +24,7 @@ function showOpenAppointment(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url: 'http://localhost:8083/tapserve/'+id+'/appointments/open',
+		url: 'http://localhost/tapserve/'+id+'/appointments/open',
 		success: function(result){
 			$('#dataDiv').empty();
 			var arrayLength = result.length

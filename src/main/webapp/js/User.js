@@ -40,7 +40,7 @@ function fetchServices(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url:'http://localhost:8083/tapserve/services',
+		url:'http://localhost/tapserve/services',
 		success: function(result){
 			servicesFetchedFromDb = result;
 			populateServicesOnPage();
@@ -64,7 +64,7 @@ function searchSP(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url: 'http://localhost:8083/tapserve/findServiceProviders/'+id+'/'+$('#regionIdentifier').val()+'/'+$('#servicesDropdown').val(),
+		url: 'http://localhost/tapserve/findServiceProviders/'+id+'/'+$('#regionIdentifier').val()+'/'+$('#servicesDropdown').val(),
 		success: function(result){
 			$('#dataDiv').empty();
 			searchResult = result;
@@ -81,12 +81,42 @@ function searchSP(){
 						sum = sum + result[i].reviews[j].rating;
 					}
 					var avgRating = sum/reviewsLength;
-					$('#dataDiv').append('<div id="detailsPane'+i+'" class="w3-panel w3-card-8 w3-theme-d1"> <p> Provider Name : '+result[i].serviceProvider.name+'</p> <p> Organisation Name : '+result[i].serviceProvider.organizationName+' &nbsp; Average Rating : '+avgRating+' stars</p>'+'<p>Contact No. : '+result[i].serviceProvider.contactNumber+' &nbsp;&nbsp;&nbsp; Address : '+result[i].serviceProvider.address+' &nbsp;&nbsp; Region : '+result[i].serviceProvider.regionIdentifier+'</p> <div class="group"><input type="button" class="button" value="Book Appointment" onclick="bookAppointment('+i+');"></div></div>');
+					if(isNaN(avgRating)){
+						avgRating = 0;
+					}
+					$('#dataDiv').append('<div id="detailsPane'+i+'" class="w3-panel w3-card-8 w3-theme-d1"> <p> Provider Name : '+result[i].serviceProvider.name+'</p> <p> Organisation Name : '+result[i].serviceProvider.organizationName+' &nbsp; Average Rating : '+avgRating+' stars</p>'+'<p>Contact No. : '+result[i].serviceProvider.contactNumber+' &nbsp;&nbsp;&nbsp; Address : '+result[i].serviceProvider.address+' &nbsp;&nbsp; Region : '+result[i].serviceProvider.regionIdentifier+'</p> <div class="group"><input type="button" class="button" value="Book Appointment" onclick="bookAppointment('+i+');"></div><div class="group"><input type="button" class="button" value="See Reviews" onclick="displayPopupReview('+i+');"></div></div>');
 				}
 			}
 		}
 	});
 }
+
+function displayPopupReview(count){
+	
+	$('#modalData').empty();
+	
+	var reviewbyFriendLength = searchResult[count].reviewsByFriends.length;
+	
+	$('#modalData').append('<p><span id="friendReviews">Reviews by Friends : ');
+	
+	for(var i=0; i<reviewbyFriendLength; i++){
+		
+		$('#friendReviews').append('<span>'+searchResult[count].reviewsByFriends[i].user.name+'</span>&nbsp;&nbsp;&nbsp;');
+	}
+	
+	$('#modalData').append('</span></p>');
+	
+	var length = searchResult[count].reviews.length;
+	
+	for(var i=0; i<length; i++){
+		
+		$('#modalData').append('<p><div><span>Name : '+searchResult[count].reviews[i].user.name+'</span></div> <div><span>Rating : '+searchResult[count].reviews[i].rating+'</span></div> <div><span>Review : '+searchResult[count].reviews[i].review+'</span></div></p>');
+	}
+	
+	$('#modalPopup').show();	
+}
+
+
 
 function bookAppointment(count){
 
@@ -136,7 +166,7 @@ function appointmentRequest(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/'+user.id+'/bookAppointment/'+serviceProvider.id+'/'+service.id,
+		url: 'http://localhost/tapserve/'+user.id+'/bookAppointment/'+serviceProvider.id+'/'+service.id,
 		data: jsonString,
 		success: function(result){
 			$('#appointmentFields').hide();
@@ -157,7 +187,7 @@ function showAppointmentListForUser(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url: 'http://localhost:8083/tapserve/'+id+'/appointments',
+		url: 'http://localhost/tapserve/'+id+'/appointments',
 		success: function(result){
 			$('#appointmentList').empty();
 			appointmentList = result;
@@ -184,7 +214,7 @@ function showAppointmentDetail(count){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "GET",
-		url: 'http://localhost:8083/tapserve/'+userId+'/appointments/'+appointmentId,
+		url: 'http://localhost/tapserve/'+userId+'/appointments/'+appointmentId,
 		success: function(result){
 			$('#appointmentDetailsSpace').empty();
 			$('#appointmentDetailsSpace').show();
@@ -215,7 +245,7 @@ function makePayment(count){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/'+userId+'/payment/'+appointmentId,
+		url: 'http://localhost/tapserve/'+userId+'/payment/'+appointmentId,
 		data: jsonString,
 		success: function(result){
 			$('#paymentPane').empty();
@@ -245,7 +275,7 @@ function postReview(count){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/'+userId+'/postReview/'+serviceProviderId,
+		url: 'http://localhost/tapserve/'+userId+'/postReview/'+serviceProviderId,
 		data: jsonString,
 		success: function(result){
 			$('#reviewPane').empty();

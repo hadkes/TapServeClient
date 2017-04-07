@@ -13,7 +13,7 @@ function adminRegister(){
 	$.ajax({
 		contentType: 'application/JSON',
 		type: "POST",
-		url: 'http://localhost:8083/tapserve/register/administrator/'+$('#generatedId').val(),
+		url: 'http://localhost/tapserve/register/administrator/'+$('#generatedId').val(),
 		data: jsonString,
 		success: function(result){
 			$('#successMessage').text("You have been registered successfully! Please wait while you are being redirected to the login page.").show();
