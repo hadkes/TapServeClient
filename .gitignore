@@ -1,6 +1,5 @@
 .DS_Store
 .project
-.settings/org.eclipse.jdt.apt.core.prefs
 target/
 
 
